@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Car Finder Pro</title>
+    <link rel="shortcut icon" href="img/favicon.png"/>"
+
+
+    <!-- Bootstrap core CSS -->
+  <!--  <link href="css/bootstrap.css" rel="stylesheet">-->
+     <link href="Content/bootstrap.min.css" rel="stylesheet" />
+   
+    <link href="css/trNgGrid.css" rel="stylesheet" />
+   
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-ui/ui-bootstrap.js"></script>
+     <script src="scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/trNgGrid.min.js"></script>
+
+    <!-- Add custom CSS here -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body  ng-app="myModule">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+                <a id="navbartop" class="navbar-brand" href="index.html"><img id="toplogo" src="img/Carfinderlogo.png "/></a>
+            </div>
+        </div>
+
+
+        <!-- /.container -->
+    </nav>
+
+    <div id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image: url('img/1.png'); "></div>
+                <div class="carousel-caption">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image: url('img/12.png'); "></div>
+                <div class="carousel-caption">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image: url('img/5.png'); "></div>
+                <div class="carousel-caption">
+                    <h1>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+
+    <div class="section" style="background-color:#080808">
+
+        <div class="container">
+            <div class=text-center>
+                <h2 style="color:white;"><i>LET US HELP YOU FIND YOUR NEXT NEW CAR WITH CAR FINDER PRO</i></h2>
+                
+            </div>
+
+<!--CAR FINDER STARTS HERE--------------------------------------------------------------------------------------------------------->
+
+            <div ng-controller="myController as carCtrl">
+
+                <!--YEAR---///////////////////////////////////////////////////////////////////////-->
+                <div class="row search">
+                    <div class="col-md-3 col-sm-3">
+                     <center><h3 style="color:red;">YEAR</h3> 
+                        <select ng-model="carCtrl.options.year"
+                                ng-options="year for year in carCtrl.years"
+                                ng-change="carCtrl.getMakes()"style="width:100px"></select></center>   
+                                
+                    </div>
+
+
+                    <!--MAKE---///////////////////////////////////////////////////////////////////////-->
+
+                    <div class="col-md-3 col-sm-3">
+                    <center><h3 style="color:red;">MAKE</h3>
+                        <select ng-model="carCtrl.options.make"
+                                ng-options="make for make in carCtrl.makes"
+                                ng-change="carCtrl.getModels()"style="width:100px"></select></center>
+                    </div>
+
+                    <!--MODEL----///////////////////////////////////////////////////////////////////////-->
+
+                    <div class="col-md-3 col-sm-3">
+                        <center><h3 style="color:red;">MODEL</h3>
+                        <select ng-model="carCtrl.options.model"
+                                ng-options="model for model in carCtrl.models"
+                                ng-change="carCtrl.getTrims()"style="width:100px"></select></center>
+</div>
+
+                    <!--TRIM----///////////////////////////////////////////////////////////////////////-->
+
+                    <div class="col-md-3 col-sm-3">
+                        <center><h3 style="color:red;">TRIM</h3>
+                        <select ng-model="carCtrl.options.trim"
+                                ng-options="trim for trim in carCtrl.trims" 
+                                ng-change="carCtrl.getCars()"style="width:100px"></select></center>
+</div>
+                </div>
+
+                <!--///////////////////////////////////////////////////////////////////////-->
+
+                <div>
+                    <br />
+                    <table tr-ng-grid="" items="carCtrl.cars" fields="['model_year','make','model_name','body_style','transmission_type']" page-items="6">
+                        <thead>
+                            <tr>
+                                <th field-name="model_year" display-name="Year"></th>
+                                <th field-name="make" display-name="Make"></th>
+                                <th field-name="model_name" display-name="Model"></th>
+                                <th field-name="body_style" display-name="Style"></th>
+                                <th field-name="transmission_type" display-name="Transmission"></th>
+                                <th display-name="Get Info" enable-filtering="false" enable-sorting="false"></th>        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> <button name="info" ng-click="carCtrl.open(gridItem.id)">Get Info</button></td>
+                             </tr>                        
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- /.row -->
+
+
+<!--NG MODAL START////////////////////////////////////////////////////////////////////////////////////////////-->
+                <script type="text/ng-template" id="carInfo.html">
+                    <div class="modal-header">
+                        <div>
+                             <span></span>
+                            <button class="btn btn-primary pull-right" ng-click="cm.cancel()">X</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  
+                                  <img class="img-responsive" ng-src="{{cm.car.image}}" />
+                                </div>
+                        
+                            
+                                <div class="col-md-6">
+
+                                    <strong>MAKE :</strong>{{cm.car.car.make}}<br />
+                                    <strong>YEAR :</strong>{{cm.car.car.model_year}}<br />
+                                    <strong>TRIM :</strong>{{cm.car.car.model_trim}}<br />
+                                    <strong>CYLINDERS :</strong>{{cm.car.car.engine_num_cyl}}<br />
+                                    <strong>TYPE :</strong>{{cm.car.car.engine_type}}<br />
+                                    <strong>FUEL :</strong>{{cm.car.car.model_fuel}}<br />
+                                    <strong>FRT/RWD :</strong>{{cm.car.car.drive_type}}<br />
+                                    <strong>TRANSMISSION :</strong>{{cm.car.car.transmission_type}}<br />
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <strong>
+                                        Recall Information - {{cm.car.recalls.Count}} Recalls
+                                    </strong>
+                                    <uib-accordion close-others="oneAtATime">
+                                        <uib-accordion-group ng-repeat="result in cm.car.recalls.Results" heading="{{result.Component}}" class="accordion-margin">
+                                            <strong>Manufacturer:</strong>{{result.Manufacturer}}<br />
+                                            <strong>Campaign Number:</strong>{{result.NHTSACampaignNumber}}<br />
+                                            <strong>Action Number:</strong>{{result.NHTSAActionNumber}}<br />
+                                            <strong>Summary:</strong>{{result.Summary}}<br />
+                                            <strong>Consequence:</strong>{{result.Conequence}}<br />
+                                            <strong>Remedy:</strong>{{result.Remedy}}<br />
+                                            <strong>Notes:</strong>{{result.Notes}}<br />
+                                        </uib-accordion-group>
+                                    </uib-accordion>
+                                </div>
+                            </div>
+
+                        </div>
+                      </div><!--Modal Body End-->
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="cm.ok()">Close</button>
+                    </div>
+
+
+                    
+                    
+</script>
+ 
+<!--NG MODAL END////////////////////////////////////////////////////////////////////////////////////////////-->            
+
+            
+            </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div id="topbox"class="section-colored text-center">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2></h2>
+                    <p></p><br /><br /><br /><br /><br />
+                    <!--<hr>-->
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+    <div class="section">
+
+        <div class="container">
+
+            <!--<div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Display Some Work on the Home Page Portfolio</h2>
+                    <hr>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
+                    </a>
+                </div>
+            </div>-->
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section-colored">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>We Give You A Guarantee:</h2>
+                    <ul>
+                        <li>Lowest Price on the internet</li>
+                        <li>We negotiate for you</li>
+                        <li>We can get the vehicle to your front door</li>
+                        <li>Other dealers love us</li>
+                        <li>Great relationship with a ton of Dealers across the Nation</li>                       
+                    </ul>
+                </div>
+                <div id="imgG"class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive"<img src="img/6.png">
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive"<img src="img/7.png" />"">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2 style="color:white;">All In One Place:</h2>
+                    <ul style="color:white;">
+                        <li><strong>100%</strong>FINANCING</li>
+                        <li>Guarentee the lowest rates</li>
+                        <li>Low monthly payments</li>
+                        <li>240 Point inspection</li>
+                        <li>Warranty on our vehicles</li>
+                        <li>We privde service for your vehicle</li>                       
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+  
+         <div class="container">
+
+        <hr>
+
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Car Finder Pro</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/modern-business.js"></script>
+    <script src="module.js"></script>
+
+
+
+
+</body>
+
+</html>

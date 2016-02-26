@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="rickdonathan-carfinderpro" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Admin\\documents\\visual\ studio\ 2015\\Projects\\Car_Finder_Pro\\Car_Finder_Pro\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Admin\\documents\\visual\ studio\ 2015\\Projects\\Car_Finder_Pro\\Car_Finder_Pro\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

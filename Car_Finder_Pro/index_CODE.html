@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Finder Pro</title>
+	<meta charset="utf-8" />
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/angular-ui/ui-bootstrap.js"></script>
+    <script src="module.js"></script>
+
+
+
+</head>
+<body ng-app="myModule" class="container">
+
+ <div ng-controller="myController as carCtrl">
+
+<!--YEAR---///////////////////////////////////////////////////////////////////////-->
+     <div class="row search">
+         <div class="col-md-3 col-sm-3">
+             <h3>YEAR</h3>
+             <select ng-model="carCtrl.options.year"
+                     ng-options="year for year in carCtrl.years"
+                     ng-change="carCtrl.getMakes()">
+
+             </select>
+         </div>
+    
+
+<!--MAKE---///////////////////////////////////////////////////////////////////////-->
+     
+         <div class="col-md-3 col-sm-3">
+             <h3>MAKE</h3>
+             <select ng-model="carCtrl.options.make"
+                     ng-options="make for make in carCtrl.makes"
+                     ng-change="carCtrl.getModels()">
+
+             </select>
+         </div>
+   
+<!--MODEL----///////////////////////////////////////////////////////////////////////-->
+     
+         <div class="col-md-3 col-sm-3">
+             <h3>MODEL</h3>
+             <select ng-model="carCtrl.options.model"
+                     ng-options="model for model in carCtrl.models"
+                     ng-change="carCtrl.getTrims()"></select>
+         
+        </div>
+
+<!--TRIM----///////////////////////////////////////////////////////////////////////-->
+     
+         <div class="col-md-3 col-sm-3">
+             <h3>TRIM</h3>
+             <select ng-model="carCtrl.options.trim"
+                     ng-options="trim for trim in carCtrl.trims"></select>
+         </div>
+         </div>
+    
+<!--///////////////////////////////////////////////////////////////////////-->
+
+     <div>     <br /> 
+             <table style="border:1px solid black">
+                 <thead>
+                     <tr>
+                         <th style="border:1px solid black">&nbspYEAR&nbsp</th>
+                         <th style="border:1px solid black">&nbspMAKE&nbsp</th>
+                         <th style="border:1px solid black">&nbspSERIES&nbsp</th>
+                         <th style="border:1px solid black">&nbspSTYLE&nbsp</th>
+                         <th style="border:1px solid black">&nbspTRANSMISSION&nbsp</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr ng-repeat="car in carCtrl.cars">
+                         <td style="border:1px solid black">{{car.model_year}}</td>
+                         <td style="border:1px solid black">{{car.make}}</td>
+                         <td style="border:1px solid black">{{car.model_name}}</td>
+                         <td style="border:1px solid black">{{car.body_style}}</td>
+                         <td style="border:1px solid black">{{car.transmission_type}}</td>
+                     </tr>
+                 </tbody>
+             </table>
+         </div>
+
+</div>
+</body>
+</html>
